@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class myImagerPagers extends StatelessWidget {
   @override
@@ -159,9 +159,9 @@ class FileImageStat extends State<FileImageWidget> {
   var _imager;
 
   Future getImger() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+   // var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _imager = image;
+    //  _imager = image;
     });
   }
 

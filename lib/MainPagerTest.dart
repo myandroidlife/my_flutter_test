@@ -10,6 +10,7 @@ import 'dart:ui';
 import 'package:flutter_app/sliver/refresh.dart';
 
 import 'Become_a_shop_owner.dart';
+import 'MyPager.dart';
 
 class MainPagers extends StatelessWidget {
   @override
@@ -208,7 +209,7 @@ class MainPagersStat extends State<MainPagersWidget> {
               ? Classification()
               : _currentIndex == 2
                   ? GoodsCar()
-                  : _currentIndex == 3 ? BecomeAShopOwner() : WaterfallsFlowPager(),
+                  : _currentIndex == 3 ? BecomeAShopOwner() : MyPager(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[

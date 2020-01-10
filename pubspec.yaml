@@ -23,7 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  image_picker: ^0.6.2+3
+  #image_picker: ^0.6.3
   fluro: ^1.5.1
   flutter_swiper: ^1.1.6
   #fluttertoast: ^2.1.1
@@ -54,24 +54,52 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   #一些图片资源
   assets:
-   - assets/imagers/abc.jpg
-   - assets/imagers/icon_classs.png
-   - assets/imagers/icon_home_page.png
-   - assets/imagers/home_pager_bg.png
-   - assets/imagers/notify.png
-   - assets/imagers/arraow_right.png
-   - assets/imagers/search.png
-   - assets/imagers/goods_test.png
-   - assets/imagers/ii.png
-   - assets/imagers/you_like.png
-   - assets/imagers/empty_logo.png
-   - assets/imagers/un_check.png
-   - assets/imagers/check.png
-   - assets/imagers/is_story_banner.png
-   - assets/imagers/is_story_banner_bo.png
-   - assets/imagers/img_left.png
-   - assets/imagers/img_right.png
-   - assets/imagers/owner_subscript.png
+  # assets-generator-begin
+  # assets/imagers/*
+    - assets/imagers/abc.jpg
+    - assets/imagers/agent_add_img.png
+    - assets/imagers/agent_performance.png
+    - assets/imagers/arraow_right.png
+    - assets/imagers/check.png
+    - assets/imagers/default_head.png
+    - assets/imagers/empty_logo.png
+    - assets/imagers/goods_test.png
+    - assets/imagers/home_pager_bg.png
+    - assets/imagers/icon_class.png
+    - assets/imagers/icon_classs.png
+    - assets/imagers/icon_home_page.png
+    - assets/imagers/icon_home_pages.png
+    - assets/imagers/icon_my.png
+    - assets/imagers/icon_mys.png
+    - assets/imagers/icon_my_bg.png
+    - assets/imagers/icon_shop_car.png
+    - assets/imagers/icon_shop_cars.png
+    - assets/imagers/icon_shop_owner.png
+    - assets/imagers/icon_shop_owners.png
+    - assets/imagers/ii.png
+    - assets/imagers/img_left.png
+    - assets/imagers/img_right.png
+    - assets/imagers/is_story_banner.png
+    - assets/imagers/is_story_banner_bo.png
+    - assets/imagers/message.png
+    - assets/imagers/my_after_elimination.png
+    - assets/imagers/my_answer.png
+    - assets/imagers/my_order.png
+    - assets/imagers/my_transfer.png
+    - assets/imagers/my_wallet.png
+    - assets/imagers/my_withdrawal.png
+    - assets/imagers/notify.png
+    - assets/imagers/owner_subscript.png
+    - assets/imagers/search.png
+    - assets/imagers/set.png
+    - assets/imagers/shareholder_dividends.png
+    - assets/imagers/shop_center.png
+    - assets/imagers/transaction_details.png
+    - assets/imagers/un_check.png
+    - assets/imagers/white_arraow_right.png
+    - assets/imagers/you_like.png
+  # assets-generator-end
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
