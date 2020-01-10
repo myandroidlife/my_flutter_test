@@ -213,32 +213,12 @@ class MainPagersStat extends State<MainPagersWidget> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            title: Text("首页"),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.golf_course,
-              ),
-              title: Text("成为店主")),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.print,
-              ),
-              title: Text("分类")),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.widgets,
-              ),
-              title: Text("购物车")),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.photo,
-              ),
-              title: Text("我的"))
+          _navIten(0),
+          _navIten(1),
+          _navIten(2),
+          _navIten(3),
+          _navIten(4),
+
         ],
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -276,15 +256,16 @@ class MainPagersStat extends State<MainPagersWidget> {
       ),
     );
   }
-
+//灰色
+  List<String> titles = ['首页','成为店主','分类','购物车','我的'];
+  List<String> mIconDoctorsIds = [  'icon_home_page', 'icon_shop_owner', 'icon_class', 'icon_shop_car', 'icon_my'];
+  List<String> mIconDoctorsSelectIds = [  'icon_home_pages', 'icon_shop_owners', 'icon_classs', 'icon_shop_cars', 'icon_mys'];
 
   void _statPager() {
 //    var bodyJson = '{"user":1281,"pass":3041}';
 //    router.navigateTo(context, '/home/$bodyJson');
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => SliverTestPager((offset) {
-              print('回调 $offset');
-            })));
+        builder: (context) => SliverTestPager(null)));
   }
 
   buildWeight() {
@@ -321,6 +302,13 @@ class MainPagersStat extends State<MainPagersWidget> {
       ),
     );
   }
+
+  _navIten(int i) {
+    return  BottomNavigationBarItem(
+      icon: Image.asset('assets/imagers/${_currentIndex==i?mIconDoctorsSelectIds[i]:mIconDoctorsIds[i]}.png',height: 24,),
+      title: Text(titles[i]),
+    );
+  }
 }
 
 class SearchWidget extends StatelessWidget {
@@ -353,7 +341,7 @@ class SearchWidget extends StatelessWidget {
               width: 5,
             ),
             Text(
-              "我就是输入框哈哈",
+              "请输入你想要搜索的内容",
               style: TextStyle(color: Color(0xff8e8e93)),
             )
           ],

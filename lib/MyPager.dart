@@ -217,12 +217,9 @@ class MyPagerStat extends State<MyPager> {
         crossAxisSpacing: 6.0,
         childAspectRatio: 175 / 262, //子控件宽高比
       ),
-      delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-          return Items.getGoodItem(context, index);
-        },
-        childCount: 20,
-      ),
+      delegate: SliverChildBuilderDelegate((context, index) {
+        return Items.getGoodItem(context, index,Items.goods[index]);
+      }, childCount: Items.goods.length),
     );
   }
 }

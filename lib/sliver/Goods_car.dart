@@ -161,8 +161,8 @@ class GoodsCarStat extends State<GoodsCar> {
   _youLikeGoods() {
     return SliverGrid(
         delegate: SliverChildBuilderDelegate((context, index) {
-          return Items.getGoodItem(context, index);
-        }, childCount: 20),
+          return Items.getGoodItem(context, index,Items.goods[index]);
+        }, childCount: Items.goods.length),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,

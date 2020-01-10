@@ -98,6 +98,31 @@ flutter:
     - assets/imagers/un_check.png
     - assets/imagers/white_arraow_right.png
     - assets/imagers/you_like.png
+    - assets/imagers/natural_skin_care.png
+    - assets/imagers/physical_therapy.png
+    - assets/imagers/to_lose_weight.png
+    - assets/imagers/female_intimate.png
+    - assets/imagers/specia_underwaier.png
+    - assets/imagers/drug.png
+    - assets/imagers/foot.png
+    - assets/imagers/sexual_health.png
+    - assets/imagers/banner1.png
+    - assets/imagers/banner2.png
+    - assets/imagers/icon_home_page.png
+    - assets/imagers/icon_shop_owner.png
+    - assets/imagers/icon_class.png
+    - assets/imagers/icon_shop_car.png
+    - assets/imagers/icon_my.png
+    - assets/imagers/icon_home_pages.png
+    - assets/imagers/icon_shop_owners.png
+    - assets/imagers/icon_classs.png
+    - assets/imagers/icon_shop_cars.png
+    - assets/imagers/icon_mys.png
+    - assets/imagers/goods1.png
+    - assets/imagers/goods2.png
+    - assets/imagers/goods3.png
+    - assets/imagers/goods4.png
+
   # assets-generator-end
 
   # An image asset can refer to one or more resolution-specific "variants", see

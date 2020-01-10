@@ -88,9 +88,9 @@ class BecomeAShopOwnerStat extends State<BecomeAShopOwner> {
               ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return Items.getGoodItem(context, index,isShow: true);
+                  return Items.getGoodItem(context, index,Items.goods[index],isShow: true);
                 },
-                childCount: 20,
+                childCount: Items.goods.length,
               ),
             ),
           ],

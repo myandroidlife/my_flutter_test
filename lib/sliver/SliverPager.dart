@@ -71,7 +71,6 @@ class _SliverTestPageState extends State<HomePage> {
         child: new CustomScrollView(
           controller: _controller,
           slivers: <Widget>[
-
             buildSliverAppBar(),
             new SliverGrid(
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -97,12 +96,9 @@ class _SliverTestPageState extends State<HomePage> {
                 crossAxisSpacing: 6.0,
                 childAspectRatio: 175 / 262, //子控件宽高比
               ),
-              delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return Items.getGoodItem(context, index);
-                },
-                childCount: 20,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return Items.getGoodItem(context, index,Items.goods[index]);
+              }, childCount: Items.goods.length),
             ),
              SliverStaggeredGrid.count(
               crossAxisCount: 4,
@@ -198,13 +194,7 @@ class _SliverTestPageState extends State<HomePage> {
             snap: false,
             actions: <Widget>[
               new IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  print("添加");
-                },
-              ),
-              new IconButton(
-                icon: Icon(Icons.more_horiz),
+                icon: Image.asset('assets/imagers/message.png'),
                 onPressed: () {
                   print("更多");
                 },
@@ -221,13 +211,13 @@ class _SliverTestPageState extends State<HomePage> {
                       pagination: SwiperPagination(),
                       itemHeight: 278.0,
                       itemBuilder: (BuildContext context, int index) {
-                        return new Image.network(
-                          'http://a.hiphotos.baidu.com/zhidao/pic/item/b17eca8065380cd7f92497e2a044ad3459828182.jpg',
+                        return new Image.asset(
+                          pagers[index],
                           fit: BoxFit.fill,
                           height: 278.0,
                         );
                       },
-                      itemCount: 10,
+                      itemCount: pagers.length,
 //                viewportFraction: 0.8,
 //                scale: 0.9,
                     ),
@@ -244,19 +234,32 @@ class _SliverTestPageState extends State<HomePage> {
                     )
                   ],
                 )),
-            leading: new IconButton(
+            leading: widget.offset==null?new IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(parenContext);
                 // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SliverTestPager()));
               },
-            ),
+            ):null,
           );
   }
 
+  //选中
 
+  List<String> pagers = ['assets/imagers/banner1.png','assets/imagers/banner2.png'];
+  Map<String,String> menus = {
+    '本真护肤':'assets/imagers/natural_skin_care.png',
+    '中医理疗':'assets/imagers/physical_therapy.png',
+    '减肥塑形':'assets/imagers/to_lose_weight.png',
+    '女性私密': 'assets/imagers/female_intimate.png',
+    '内衣专场':'assets/imagers/specia_underwaier.png',
+    '中医药物':'assets/imagers/drug.png',
+    '健康食品':'assets/imagers/foot.png',
+    '两性健康':'assets/imagers/sexual_health.png',};
 
   Widget _getMenu(BuildContext context, int index) {
+     List<String> keys= menus.keys.toList();
+     List<String> imgs = menus.values.toList();
     return Container(
         height: 64,
         color: Colors.white,
@@ -264,14 +267,12 @@ class _SliverTestPageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.network(
-                'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1783949068,4013858466&fm=26&gp=0.jpg',
-                width: 40,
-                height: 40,
+              Image.asset(
+                imgs[index],
               ),
               Center(
                 child: Text(
-                  "本真护肤",
+                  keys[index],
                   style: TextStyle(color: Color(0xff333333), fontSize: 12),
                 ),
               )

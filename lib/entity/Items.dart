@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 class Items{
- static getGoodItem(BuildContext context, int index,{bool isShow=false}) {
+ static List<String> goods = ['goods1','goods2','goods3','goods4',];
+ static getGoodItem(BuildContext context, int index,String img,{bool isShow=false}) {
     return Container(
       margin: EdgeInsets.only(
           left: index % 2 == 0 ? 8 : 0, right: index % 2 == 0 ? 0 : 8),
@@ -11,8 +12,8 @@ class Items{
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
             child: Stack(children: <Widget>[
-              Image.network(
-                'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1579070245&di=6c8c91b046dad868bf988f6dbd3064f8&imgtype=jpg&er=1&src=http%3A%2F%2Fimg1.efu.com.cn%2Fupfile%2Fnews%2Fcommonly%2F2012%2F2012-02-28%2F2a7d6915-a7bf-4f8f-915f-d26fd2a1ef3f.jpg',
+              Image.asset(
+                'assets/imagers/$img.png',
                 fit: BoxFit.cover,
                 width: 500,
                 height: 175,
