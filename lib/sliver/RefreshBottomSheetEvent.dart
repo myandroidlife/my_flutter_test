@@ -1,0 +1,3 @@
+class RefreshBottomSheetEvent {
+  RefreshBottomSheetEvent();
+}

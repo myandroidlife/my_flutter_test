@@ -35,6 +35,8 @@ dependencies:
   qr_flutter: ^3.1.0
   barcode_scan: ^1.0.0
   cached_network_image: ^2.0.0
+  camera: ^0.5.7+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -122,6 +124,9 @@ flutter:
     - assets/imagers/goods2.png
     - assets/imagers/goods3.png
     - assets/imagers/goods4.png
+    - assets/imagers/icon_contact.png
+    - assets/imagers/close.png
+    - assets/imagers/goods_img_pop.png
 
   # assets-generator-end
 

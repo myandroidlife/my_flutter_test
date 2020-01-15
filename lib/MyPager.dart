@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/r.dart';
 
 import 'entity/Items.dart';
+import 'sliver/circle_progress_bar.dart';
 
 class MyPager extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class MyPager extends StatefulWidget {
 
 class MyPagerStat extends State<MyPager> {
   double height = 0;
+
+  var progress = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,98 +60,102 @@ class MyPagerStat extends State<MyPager> {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         collapseMode: CollapseMode.pin,
-        background: Stack(
-          children: <Widget>[
-            Image.asset(
-              'assets/imagers/icon_my_bg.png',
-              height: 236,
-              fit: BoxFit.fitHeight,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                  top: MediaQueryData.fromWindow(window).padding.top + 58,
-                  left: 15),
-              child: Row(
-                children: <Widget>[
-                  Image.asset(
-                    'assets/imagers/default_head.png',
-                    height: 58,
-                    width: 58,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        '我是新用户',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 15),
-                    child: Image.asset('assets/imagers/white_arraow_right.png'),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                  left: 50,
-                  right: 50,
-                  top: MediaQueryData.fromWindow(window).padding.top + 123),
-              height: 45,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  _textInfo('4', '商品收藏'),
-                  _textInfo('4', '店铺关注'),
-                  _textInfo('4', '浏览记录'),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(left: 9, right: 9),
-                child: PhysicalModel(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
+        background: _bg(),
+      ),
+    );
+  }
+
+  Stack _bg() {
+    return Stack(
+        children: <Widget>[
+          Image.asset(
+            'assets/imagers/icon_my_bg.png',
+            height: 236,
+            fit: BoxFit.fitHeight,
+          ),
+          Container(
+            margin: EdgeInsets.only(
+                top: MediaQueryData.fromWindow(window).padding.top + 58,
+                left: 15),
+            child: Row(
+              children: <Widget>[
+                Image.asset(
+                  'assets/imagers/default_head.png',
+                  height: 58,
+                  width: 58,
+                ),
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 19, top: 10, bottom: 10),
-                    child: Row(
-                      children: <Widget>[
-                        PhysicalModel(
-                          color: Color(0xffcd13117),
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(13),
-                              bottom: Radius.circular(13)),
-                          child: SizedBox(
-                            height: 11,
-                            width: 5,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            '宝励常用',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Color(0xff333333),
-                                fontWeight: FontWeight.normal),
-                          ),
-                        ),
-                      ],
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      '我是新用户',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(right: 15),
+                  child: Image.asset('assets/imagers/white_arraow_right.png'),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+                left: 50,
+                right: 50,
+                top: MediaQueryData.fromWindow(window).padding.top + 123),
+            height: 45,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _textInfo('4', '商品收藏'),
+                _textInfo('4', '店铺关注'),
+                _textInfo('4', '浏览记录'),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(left: 9, right: 9),
+              child: PhysicalModel(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 19, top: 10, bottom: 10),
+                  child: Row(
+                    children: <Widget>[
+                      PhysicalModel(
+                        color: Color(0xffcd13117),
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(13),
+                            bottom: Radius.circular(13)),
+                        child: SizedBox(
+                          height: 11,
+                          width: 5,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          '宝励常用',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xff333333),
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            ),
+          )
+        ],
+      );
   }
 
   _addAllData() {
@@ -177,7 +184,18 @@ class MyPagerStat extends State<MyPager> {
     Container(margin: EdgeInsets.fromLTRB(9, 10, 9, 10),decoration:BoxDecoration(borderRadius: BorderRadius.circular(10)),child: Column(children: <Widget>[
       Image.asset(R.assetsImagersAgentAddImg),
       _shareholderCertification(),
-
+      CircleProgressBar(
+        radius: 120.0,
+        dotColor: Colors.pink,
+        dotRadius: 18.0,
+        shadowWidth: 2.0,
+        progress: 0.0,
+        progressChanged: (value) {
+          setState(() {
+            progress = value;
+          });
+        },
+      ),
     ],),),
     _youLike()
     ]));
@@ -221,6 +239,23 @@ class MyPagerStat extends State<MyPager> {
         return Items.getGoodItem(context, index,Items.goods[index]);
       }, childCount: Items.goods.length),
     );
+  }
+}
+
+class _MyBg extends MultiChildLayoutDelegate{
+  final Widget w;
+
+  _MyBg(this.w);
+
+  @override
+  void performLayout(Size size) {
+    positionChild(w, Offset(0, -30));
+  }
+
+  @override
+  bool shouldRelayout(MultiChildLayoutDelegate oldDelegate) {
+    // TODO: implement shouldRelayout
+    return false;
   }
 }
 

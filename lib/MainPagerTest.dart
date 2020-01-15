@@ -1,3 +1,5 @@
+import 'package:camera/camera.dart';
+import 'package:camera/new/src/support_android/camera.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/sliver/Goods_car.dart';
@@ -6,10 +8,12 @@ import 'package:flutter_app/sliver/WaterfallsFlowPager.dart';
 import 'package:flutter_app/sliver/XieChenHomePager.dart';
 import 'package:flutter_app/sliver/classification/classification_classification.dart';
 import 'dart:ui';
-
+import 'caTest.dart';
+import 'ca.dart';
 import 'package:flutter_app/sliver/refresh.dart';
 
 import 'Become_a_shop_owner.dart';
+import 'Carmera.dart';
 import 'MyPager.dart';
 
 class MainPagers extends StatelessWidget {
@@ -263,11 +267,16 @@ class MainPagersStat extends State<MainPagersWidget> {
 
   void _statPager() {
 //    var bodyJson = '{"user":1281,"pass":3041}';
-//    router.navigateTo(context, '/home/$bodyJson');
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => SliverTestPager(null)));
+//    router.navigateTo(context, '/home/$bodyJson')
+    cameras();
+//    Navigator.of(context).push(MaterialPageRoute(
+//        builder: (context) => SliverTestPager(null)));
   }
-
+  Future<void> cameras() async {
+    List<CameraDescription> cameras = await availableCameras();
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => HomeContent(camera: cameras[0],)));
+  }
   buildWeight() {
     return Scaffold(
       appBar: AppBar(

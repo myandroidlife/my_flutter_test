@@ -1,18 +1,19 @@
 import 'dart:math';
 import 'dart:typed_data';
-
+import 'package:flutter_app/Carmera.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter_app/entity/Items.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 //import 'package:fluttertoast/fluttertoast.dart' ;
+import 'package:camera/camera.dart';
 
+import 'XiechenSearchList.dart';
 class SliverTestPager extends StatelessWidget {
   final Function(double offset) offset;
 
   SliverTestPager(this.offset);
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -97,7 +98,7 @@ class _SliverTestPageState extends State<HomePage> {
                 childAspectRatio: 175 / 262, //子控件宽高比
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
-                return Items.getGoodItem(context, index,Items.goods[index]);
+                return Items.getGoodItem(widget.parenContext, index,Items.goods[index]);
               }, childCount: Items.goods.length),
             ),
              SliverStaggeredGrid.count(
@@ -260,7 +261,7 @@ class _SliverTestPageState extends State<HomePage> {
   Widget _getMenu(BuildContext context, int index) {
      List<String> keys= menus.keys.toList();
      List<String> imgs = menus.values.toList();
-    return Container(
+    return  Container(
         height: 64,
         color: Colors.white,
         child: GestureDetector(
@@ -279,7 +280,6 @@ class _SliverTestPageState extends State<HomePage> {
             ],
           ),
           onTap: () {
-            print('This is Center Short Toast $index');
 //            Fluttertoast.showToast(
 //                msg: "This is Center Short Toast $index",
 //                backgroundColor: Color(0xff000000),
@@ -288,7 +288,7 @@ class _SliverTestPageState extends State<HomePage> {
 //                timeInSecForIos: 1,
 //                textColor: Color(0xffffffff));
           },
-        ));
+        ),);
   }
 
   Widget infItem(BuildContext context, int index) {
