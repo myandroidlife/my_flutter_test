@@ -10,9 +10,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_app"
+        android:installLocation="preferExternal"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

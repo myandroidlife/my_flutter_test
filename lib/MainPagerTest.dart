@@ -1,5 +1,3 @@
-import 'package:camera/camera.dart';
-import 'package:camera/new/src/support_android/camera.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/sliver/Goods_car.dart';
@@ -8,12 +6,10 @@ import 'package:flutter_app/sliver/WaterfallsFlowPager.dart';
 import 'package:flutter_app/sliver/XieChenHomePager.dart';
 import 'package:flutter_app/sliver/classification/classification_classification.dart';
 import 'dart:ui';
-import 'caTest.dart';
-import 'ca.dart';
+
 import 'package:flutter_app/sliver/refresh.dart';
 
 import 'Become_a_shop_owner.dart';
-import 'Carmera.dart';
 import 'MyPager.dart';
 
 class MainPagers extends StatelessWidget {
@@ -28,13 +24,11 @@ class MainPagers extends StatelessWidget {
     );
   }
 }
-
+//gah.yy.gah
 class MainPagersWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return MainPagersStat();
-    ;
   }
 }
 
@@ -181,7 +175,7 @@ class MainPagersStat extends State<MainPagersWidget> {
   }
 
   double MAX_OFFSET = 80; //最大滚动范围
-  double MAX_MAGING = 70; //最大右侧距离
+  double MAX_MAGING = 40; //最大右侧距离
   double APP_BAR_HEIGHT = 56;//appBar
   @override
   Widget build(BuildContext context) {
@@ -210,10 +204,10 @@ class MainPagersStat extends State<MainPagersWidget> {
               ],
             )
           : _currentIndex == 1
-              ? Classification()
+              ? BecomeAShopOwner()
               : _currentIndex == 2
-                  ? GoodsCar()
-                  : _currentIndex == 3 ? BecomeAShopOwner() : MyPager(),
+                  ? Classification()
+                  : _currentIndex == 3 ? GoodsCar() : MyPager(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
@@ -267,16 +261,11 @@ class MainPagersStat extends State<MainPagersWidget> {
 
   void _statPager() {
 //    var bodyJson = '{"user":1281,"pass":3041}';
-//    router.navigateTo(context, '/home/$bodyJson')
-    cameras();
-//    Navigator.of(context).push(MaterialPageRoute(
-//        builder: (context) => SliverTestPager(null)));
-  }
-  Future<void> cameras() async {
-    List<CameraDescription> cameras = await availableCameras();
+//    router.navigateTo(context, '/home/$bodyJson');
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => HomeContent(camera: cameras[0],)));
+        builder: (context) => SliverTestPager(null)));
   }
+
   buildWeight() {
     return Scaffold(
       appBar: AppBar(

@@ -127,7 +127,12 @@ flutter:
     - assets/imagers/icon_contact.png
     - assets/imagers/close.png
     - assets/imagers/goods_img_pop.png
-
+    - assets/imagers/banlence_payment.png
+    - assets/imagers/baoli.png
+    - assets/imagers/wx.png
+    - assets/imagers/ali.png
+    - assets/imagers/pay_add.png
+    - assets/imagers/remove.png
   # assets-generator-end
 
   # An image asset can refer to one or more resolution-specific "variants", see

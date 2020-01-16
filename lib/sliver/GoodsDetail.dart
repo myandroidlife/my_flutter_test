@@ -117,9 +117,12 @@ String s = 'sddsadsa';
      Expanded(child: ListView(children: _child(stat),padding: EdgeInsets.fromLTRB(15, 9, 15, 9) ,),flex: 1,),
      Padding(padding: EdgeInsets.fromLTRB(15, 5, 15, 5),child: GestureDetector(child:  Container(child: Text('确定',style: TextStyle(color: Colors.white,fontSize: 14),),
        alignment: Alignment.center,height: 36,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(18)),color: Color(0xffcd1317)),),onTap: (){
+       Navigator.pop(context);
        Navigator.push(context, MaterialPageRoute(builder: (context){
              return ConfirmOrder();
+
       }));
+
      },),)
    ],),decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),color: Colors.white));
  });
