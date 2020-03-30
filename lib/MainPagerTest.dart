@@ -389,18 +389,6 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  showPicker(BuildContext context) {
-    Picker picker = new Picker(
-        adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData)),
-        changeToFirst: true,
-        textAlign: TextAlign.left,
-        columnPadding: const EdgeInsets.all(8.0),
-        onConfirm: (Picker picker, List value) {
-          print(value.toString());
-          print(picker.getSelectedValues());
-        }
-    );
-    picker.show(_scaffoldKey.currentState);
-  }
+
 
 }
