@@ -11,6 +11,11 @@ import 'package:flutter_app/sliver/refresh.dart';
 
 import 'Become_a_shop_owner.dart';
 import 'MyPager.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+
+import 'ca.dart';
 
 class MainPagers extends StatelessWidget {
   @override
@@ -193,7 +198,7 @@ class MainPagersStat extends State<MainPagersWidget> {
                     });
                   }
 
-                }),
+                },context),
                 Align(
                   child: Padding(
                     padding: EdgeInsets.only(right: magingRight,left: 15),
@@ -262,10 +267,15 @@ class MainPagersStat extends State<MainPagersWidget> {
   void _statPager() {
 //    var bodyJson = '{"user":1281,"pass":3041}';
 //    router.navigateTo(context, '/home/$bodyJson');
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => SliverTestPager(null)));
+//    Navigator.of(context).push(MaterialPageRoute(
+//        builder: (context) => SliverTestPager(null)));
+    _openCarmrea();
   }
-
+  _openCarmrea() async {
+    var cameras = await availableCameras();
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => CameraApps(cameras: cameras,)));
+  }
   buildWeight() {
     return Scaffold(
       appBar: AppBar(
@@ -378,4 +388,19 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  showPicker(BuildContext context) {
+    Picker picker = new Picker(
+        adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(PickerData)),
+        changeToFirst: true,
+        textAlign: TextAlign.left,
+        columnPadding: const EdgeInsets.all(8.0),
+        onConfirm: (Picker picker, List value) {
+          print(value.toString());
+          print(picker.getSelectedValues());
+        }
+    );
+    picker.show(_scaffoldKey.currentState);
+  }
+
 }

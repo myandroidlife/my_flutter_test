@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../input_pass.dart';
 import 'Goods_car.dart';
 import 'Widgets.dart';
-
+import 'package:fluwx/fluwx.dart' as fluwx;
 class SelectPayMec extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -23,6 +23,10 @@ class SelectPayMecStat extends State<SelectPayMec> {
   void initState() {
      inputPass = InputPass();
     super.initState();
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -229,14 +233,26 @@ class SelectPayMecStat extends State<SelectPayMec> {
         isScrollControlled: true,
         context: context,
         builder: (context) {
-          return inputPass.showInputPass((pass){
-           setState(() {
-             passWord = pass;
-           });
-          });
+          fluwx.registerWxApi(appId:"wxd930ea5d5a258f4f",universalLink:"https://your.univeral.link.com/placeholder/");
+          return InputPassWight(callBack: (pass){
+            fluwx.pay( appId: 'wxd930ea5d5a258f4f',
+                partnerId: '1900000109',
+                prepayId: '1101000000140415649af9fc314aa427',
+                packageValue: 'Sign=WXPay',
+                nonceStr: '1101000000140429eb40476f8896f4c9',
+                timeStamp: 1398746574,
+                sign: '7FFECB600D7157C5AA49810D2D8F28BC2811827B',
+                signType: '选填',
+                extData: '选填'
+            );
+            setState(() {
+              passWord = pass;
+            });
+          },);
         },
         backgroundColor: Color(0xfff4f4f4));
   }
+
 
 
   /**

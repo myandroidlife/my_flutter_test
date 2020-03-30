@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/r.dart';
+import 'package:flutter_app/sliver/modify_password.dart';
 
 import 'entity/Items.dart';
 import 'sliver/circle_progress_bar.dart';
@@ -55,7 +56,11 @@ class MyPagerStat extends State<MyPager> {
           ?Color(0xffcd1317):Colors.white,
       actions: <Widget>[
         Image.asset('assets/imagers/set.png'),
-        Image.asset('assets/imagers/message.png')
+       GestureDetector(child:  Image.asset('assets/imagers/message.png'),onTap: (){//修改密码
+         Navigator.push(context, MaterialPageRoute(builder: (c){
+           return ModifyPasswordActivity();
+         }));
+       },)
       ],
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,

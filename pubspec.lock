@@ -46,10 +46,10 @@ packages:
   camera:
     dependency: "direct main"
     description:
-      name: camera
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.5.7+2"
+      path: "C:\\Users\\Administrator\\Desktop\\carmera"
+      relative: false
+    source: path
+    version: "0.5.7+3"
   charcode:
     dependency: transitive
     description:
@@ -91,21 +91,21 @@ packages:
       name: dio
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.8"
+    version: "3.0.9"
   event_bus:
     dependency: "direct main"
     description:
       name: event_bus
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   fluro:
     dependency: "direct main"
     description:
       name: fluro
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.5.1"
+    version: "1.6.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -125,6 +125,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.3"
+  flutter_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.3"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -151,6 +158,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.10+1"
+  fluwx:
+    dependency: "direct main"
+    description:
+      name: fluwx
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.1+2"
+  gzx_dropdown_menu:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "624c75e5f48e63082356690885919157c771fe0b"
+      url: "https://github.com/GanZhiXiong/gzx_dropdown_menu.git"
+    source: git
+    version: "1.0.3"
   http:
     dependency: "direct main"
     description:
@@ -199,7 +222,21 @@ packages:
       name: path_provider
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.5.1"
+    version: "1.6.5"
+  path_provider_macos:
+    dependency: transitive
+    description:
+      name: path_provider_macos
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
+  path_provider_platform_interface:
+    dependency: transitive
+    description:
+      name: path_provider_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   pedantic:
     dependency: transitive
     description:
@@ -221,6 +258,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.1"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
+  pull_to_refresh:
+    dependency: "direct main"
+    description:
+      name: pull_to_refresh
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.5.8"
   qr:
     dependency: transitive
     description:
@@ -260,7 +311,14 @@ packages:
       name: sqflite
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.0"
+    version: "1.3.0"
+  sqflite_common:
+    dependency: transitive
+    description:
+      name: sqflite_common
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0+1"
   stack_trace:
     dependency: transitive
     description:
@@ -288,7 +346,7 @@ packages:
       name: synchronized
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.0"
   term_glyph:
     dependency: transitive
     description:
@@ -339,5 +397,5 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
-  dart: ">=2.6.0 <3.0.0"
-  flutter: ">=1.10.15-pre.148 <2.0.0"
+  dart: ">=2.7.0 <3.0.0"
+  flutter: ">=1.12.0 <1.16.0"

@@ -16,6 +16,11 @@ class ConfirmOrder extends StatefulWidget {
 
 class ConfirmOrderStat extends State<ConfirmOrder> {
   var controller;
+  GlobalKey key = new GlobalKey(debugLabel: 'height');
+
+  double myTop = 0;
+
+  double height = 0;
 
   @override
   void initState() {
@@ -27,51 +32,113 @@ class ConfirmOrderStat extends State<ConfirmOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Widgets.buildAppBar(context, '确认订单'),
-      body: ListView(
-        padding: EdgeInsets.only(left: 9, right: 9),
+      body: Stack(
         children: <Widget>[
-          SizedBox(
-            height: 10,
+          NotificationListener(
+            child: _main_list(context),
+            onNotification: (notification) {
+              setState(() {
+                height = 0;
+              });
+            },
           ),
-          Items.addressItem(context),
-          SizedBox(
-            height: 10,
-          ),
-          Items.goodsInfoItem(context),
-          SizedBox(
-            height: 10,
-          ),
-          _getGoodsMec(),
-          SizedBox(
-            height: 10,
-          ),
-          _upgrade(),
-          SizedBox(
-            height: 10,
-          ),
-          _selfGet(),//自己提取
-          SizedBox(
-            height: 10,
-          ),
-          _goodsMonety(),
-          SizedBox(
-            height: 10,
-          ),
+          Positioned(
+            child: Container(
+              height: height,
+              width: MediaQuery.of(context).size.width,
+              color: Color(0xa9ffffff),
+              child: ListView(
+                children: <Widget>[],
+              ),
+            ),
+            top: myTop,
+          )
         ],
       ),
-        bottomNavigationBar: Container(height: 60,child: Padding(padding: EdgeInsets.fromLTRB(15, 7, 7, 15),child: Row(children: <Widget>[
-
-      Expanded(child:GestureDetector(child:  Container(child: Text('立即支付',style: TextStyle(color: Colors.white,fontSize: 14),),
-        alignment: Alignment.center,height: 36,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(18)),color: Color(0xffcd1317)),),onTap: (){
-Navigator.push(context, MaterialPageRoute(builder: (context){
-  return SelectPayMec();
-}));
-      },),flex: 1,)
-    ],),),color: Colors.white,),
+      bottomNavigationBar: Container(
+        height: 60,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(15, 7, 7, 15),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: GestureDetector(
+                  child: Container(
+                    child: Text(
+                      '立即支付',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    alignment: Alignment.center,
+                    height: 36,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                        color: Color(0xffcd1317)),
+                  ),
+                  onTap: () {
+                    //_showKeyList(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SelectPayMec();
+                    }));
+                  },
+                ),
+                flex: 1,
+              )
+            ],
+          ),
+        ),
+        color: Colors.white,
+      ),
     );
   }
 
+//显示筛选出的列表
+  void _showKeyList(BuildContext context) {
+    print('我是');
+    RenderBox box = key.currentContext.findRenderObject();
+    final size = box.size;
+    final topLeftPosition = box.localToGlobal(Offset.zero);
+    setState(() {
+      myTop = topLeftPosition.dy;
+      height = MediaQuery.of(context).size.height - myTop;
+    });
+    print('我是${topLeftPosition.dy} ');
+  }
 
+  ListView _main_list(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.only(left: 9, right: 9),
+      children: <Widget>[
+        SizedBox(
+          height: 10,
+        ),
+        Items.addressItem(context),
+        SizedBox(
+          height: 10,
+        ),
+        Items.goodsInfoItem(context),
+        SizedBox(
+          height: 10,
+        ),
+        _getGoodsMec(),
+        SizedBox(
+          height: 10,
+        ),
+        _upgrade(),
+        SizedBox(
+          height: 10,
+        ),
+        _selfGet(), //自己提取
+        SizedBox(
+          height: 10,
+        ),
+        _goodsMonety(),
+        SizedBox(
+          height: 10,
+        ),
+      ],
+    );
+  }
 
   int selectMec; //选择的拿货方式
   bool getGoodsMec = false;
@@ -89,9 +156,11 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
               useRootNavigator: true,
               isScrollControlled: true,
               context: context,
+              isDismissible: false,
               builder: (context) {
                 return _select(context);
               },
+
               backgroundColor: Colors.transparent);
         },
       )
@@ -121,11 +190,14 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('门店编号（必填）'),
+                    Text(
+                      '门店编号（必填）',
+                      key: key,
+                    ),
                     SizedBox(
                       height: 24,
                     ),
-                   _upgradeInput('请输入门店编号')
+                    _upgradeInput('请输入门店编号')
                   ],
                 )
               ],
@@ -262,13 +334,21 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
       ),
     );
   }
-  int upSelf ;//1自己，2带他人
+
+  int upSelf; //1自己，2带他人
   _upgrade() {
-    List<Widget> upList=[];
-    upList.add( ListTile(
-      title: Text('升级方式${upSelf!=null&&upSelf==1?"（本人升级）":'（代他人升级）'}'),
+    List<Widget> upList = [];
+    upList.add(ListTile(
+      title:
+          Text('升级方式${upSelf != null && upSelf == 1 ? "（本人升级）" : '（代他人升级）'}'),
       contentPadding: EdgeInsets.all(0),
-      trailing: Row(mainAxisSize: MainAxisSize.min,children: <Widget>[Text(upSelf!=null?'更换升级方式':''),Icon(Icons.keyboard_arrow_right)],),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(upSelf != null ? '更换升级方式' : ''),
+          Icon(Icons.keyboard_arrow_right)
+        ],
+      ),
       onTap: () {
         showModalBottomSheet(
             useRootNavigator: true,
@@ -280,26 +360,33 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
             backgroundColor: Colors.transparent);
       },
     ));
-    if(upSelf!=null){
-      if(upSelf==1){
+    if (upSelf != null) {
+      if (upSelf == 1) {
         upList.add(_upgradeInput('请输入邀请码'));
-        upList.add( SizedBox(
-          height: 24,
-        ),);
+        upList.add(
+          SizedBox(
+            height: 24,
+          ),
+        );
       }
 
       upList.add(_upgradeInput('请输入姓名'));
-      upList.add( SizedBox(
-        height: 24,
-      ),);
+      upList.add(
+        SizedBox(
+          height: 24,
+        ),
+      );
       upList.add(_upgradeInput('请输入手机号'));
     }
     return PhysicalModel(
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 5, 16, upSelf!=null?15:5),//如果选择了升级方式，增大边距
-          child:Column(children: upList,),
+          padding: EdgeInsets.fromLTRB(16, 5, 16, upSelf != null ? 15 : 5),
+          //如果选择了升级方式，增大边距
+          child: Column(
+            children: upList,
+          ),
         ));
   }
 
@@ -327,10 +414,8 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
                   stat(() {
-                    upSelf=1;
-                    setState(() {
-
-                    });
+                    upSelf = 1;
+                    setState(() {});
                   });
                   Navigator.pop(context);
                 },
@@ -340,10 +425,8 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
                   stat(() {
-                    upSelf=2;
-                    setState(() {
-
-                    });
+                    upSelf = 2;
+                    setState(() {});
                     Navigator.pop(context);
                   });
                 },
@@ -354,12 +437,16 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
       },
     );
   }
- bool isCheck = false;
+
+  bool isCheck = false;
+
   _selfGet() {
     return PhysicalModel(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
-        child:ListTile(title: Text('是否自提'),trailing: RoundCheckBox(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(6),
+      child: ListTile(
+        title: Text('是否自提'),
+        trailing: RoundCheckBox(
           isSelect: isCheck,
           selectIcon: 'assets/imagers/check.png',
           unSelectIcon: 'assets/imagers/un_check.png',
@@ -368,23 +455,54 @@ Navigator.push(context, MaterialPageRoute(builder: (context){
               isCheck = !isCheck;
             });
           },
-        ),),
-        );
+        ),
+      ),
+    );
   }
+
   _goodsMonety() {
     return PhysicalModel(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(6),
-      child:Padding(padding: EdgeInsets.fromLTRB(15, 17, 15, 17),child: Column(children: <Widget>[
-        Row(children: <Widget>[
-          Expanded(child: Text('商品总额',style: TextStyle(fontSize: 16),),flex: 1,),
-          Text('¥600.00',style: TextStyle(fontSize: 16,color: Color(0xffcd1317)),)
-        ],),
-        SizedBox(height: 10,),
-        Row(children: <Widget>[
-          Expanded(child: Text('运费',style: TextStyle(fontSize: 14),),flex: 1,),
-          Text('¥+0.00',style: TextStyle(fontSize: 14,color: Color(0xffcd1317)),)
-        ],)
-      ],),));
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(6),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(15, 17, 15, 17),
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      '商品总额',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    flex: 1,
+                  ),
+                  Text(
+                    '¥600.00',
+                    style: TextStyle(fontSize: 16, color: Color(0xffcd1317)),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      '运费',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    flex: 1,
+                  ),
+                  Text(
+                    '¥+0.00',
+                    style: TextStyle(fontSize: 14, color: Color(0xffcd1317)),
+                  )
+                ],
+              )
+            ],
+          ),
+        ));
   }
 }

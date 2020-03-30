@@ -6,21 +6,28 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter_app/entity/Items.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+
 //import 'package:fluttertoast/fluttertoast.dart' ;
 import 'package:camera/camera.dart';
 
+
+import '../income_bao_li.dart';
+import 'TimeLimitActivity.dart';
 import 'XiechenSearchList.dart';
+
 class SliverTestPager extends StatelessWidget {
   final Function(double offset) offset;
+  final BuildContext contexts;
 
-  SliverTestPager(this.offset);
+  SliverTestPager(this.offset, this.contexts);
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Image Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Color(0xffcd1317)),
-      home: new HomePage(context, offset),
+      home: new HomePage(contexts, offset),
     );
   }
 }
@@ -28,6 +35,7 @@ class SliverTestPager extends StatelessWidget {
 class HomePage extends StatefulWidget {
   var parenContext;
   final Function(double offset) offset;
+
   HomePage(this.parenContext, this.offset);
 
   @override
@@ -35,15 +43,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _SliverTestPageState extends State<HomePage> {
+
+
+
+
+
   BuildContext parenContext;
   String info = "";
+
   _SliverTestPageState(this.parenContext);
+
   GlobalKey _anchorKey = GlobalKey();
   ScrollController _controller;
 
   List<IntSize> _sizes = _createSizes(_kItemCount).toList();
 
   static const int _kItemCount = 1000;
+
   @override
   void initState() {
     super.initState();
@@ -59,14 +75,13 @@ class _SliverTestPageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  NotificationListener(
+      body: NotificationListener(
         onNotification: (notification) {
           if (notification is ScrollUpdateNotification &&
               notification.depth == 0) {
-            if(widget.offset!=null){
+            if (widget.offset != null) {
               widget.offset(notification.metrics.pixels);
             }
-
           }
         },
         child: new CustomScrollView(
@@ -81,15 +96,15 @@ class _SliverTestPageState extends State<HomePage> {
                   childAspectRatio: 1, //子控件宽高比
                 ),
                 delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return _getMenu(context, index);
+                  (BuildContext context, int index) {
+                    return _getMenu(widget.parenContext, index);
                   },
                   childCount: 8,
                 )),
             new SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  return infItem(context, index);
-                }, childCount: 1)),
+              return infItem(context, index);
+            }, childCount: 1)),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200.0,
@@ -98,60 +113,78 @@ class _SliverTestPageState extends State<HomePage> {
                 childAspectRatio: 175 / 262, //子控件宽高比
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
-                return Items.getGoodItem(widget.parenContext, index,Items.goods[index]);
+                return Items.getGoodItem(
+                    widget.parenContext, index, Items.goods[index]);
               }, childCount: Items.goods.length),
             ),
-             SliverStaggeredGrid.count(
+            SliverStaggeredGrid.count(
               crossAxisCount: 4,
               mainAxisSpacing: 4.0,
               crossAxisSpacing: 4.0,
               children: <Widget>[
-                PhysicalModel(borderRadius: BorderRadius.circular(5),color: Colors.white,child:  Container(
-                  child: CircleAvatar(child: Text('1'),),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.red),padding: EdgeInsets.all(20),
-                ),elevation: 3,), Container(
+                PhysicalModel(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                  child: Container(
+                    child: CircleAvatar(
+                      child: Text('1'),
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.red),
+                    padding: EdgeInsets.all(20),
+                  ),
+                  elevation: 3,
+                ),
+                Container(
                   child: Text('2'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('3'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('4'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('5'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('6'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('7'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('8'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('7'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.red),
-                ), Container(
+                ),
+                Container(
                   child: Text('8'),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -181,105 +214,111 @@ class _SliverTestPageState extends State<HomePage> {
           ],
         ),
       ),
-
-
     );
   }
 
   SliverAppBar buildSliverAppBar() {
     return new SliverAppBar(
-            key: _anchorKey,
-            expandedHeight: 230.0,
-            floating: false,
-            pinned: true,
-            snap: false,
-            actions: <Widget>[
-              new IconButton(
-                icon: Image.asset('assets/imagers/message.png'),
-                onPressed: () {
-                  print("更多");
+      key: _anchorKey,
+      expandedHeight: 230.0,
+      floating: false,
+      pinned: true,
+      snap: false,
+      actions: <Widget>[
+        new IconButton(
+          icon: Image.asset('assets/imagers/message.png'),
+          onPressed: () {
+            print("更多");
+          },
+        ),
+      ],
+      flexibleSpace: new FlexibleSpaceBar(
+          centerTitle: true,
+          collapseMode: CollapseMode.pin,
+          background: Stack(
+            children: <Widget>[
+              Swiper(
+                autoplay: true,
+                autoplayDelay: 5000,
+                pagination: SwiperPagination(),
+                itemHeight: 278.0,
+                itemBuilder: (BuildContext context, int index) {
+                  return new Image.asset(
+                    pagers[index],
+                    fit: BoxFit.fill,
+                    height: 278.0,
+                  );
                 },
-              ),
-            ],
-            flexibleSpace: new FlexibleSpaceBar(
-                centerTitle: true,
-                collapseMode: CollapseMode.pin,
-                background: Stack(
-                  children: <Widget>[
-                    Swiper(
-                      autoplay: true,
-                      autoplayDelay: 5000,
-                      pagination: SwiperPagination(),
-                      itemHeight: 278.0,
-                      itemBuilder: (BuildContext context, int index) {
-                        return new Image.asset(
-                          pagers[index],
-                          fit: BoxFit.fill,
-                          height: 278.0,
-                        );
-                      },
-                      itemCount: pagers.length,
+                itemCount: pagers.length,
 //                viewportFraction: 0.8,
 //                scale: 0.9,
-                    ),
-                    Align(
-                      child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(6)),
-                        child: Container(
-                          height: 6,
-                          color: Color(0xffffffff),
-                        ),
-                      ),
-                      alignment: FractionalOffset.bottomCenter,
-                    )
-                  ],
-                )),
-            leading: widget.offset==null?new IconButton(
+              ),
+              Align(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(6)),
+                  child: Container(
+                    height: 6,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                alignment: FractionalOffset.bottomCenter,
+              )
+            ],
+          )),
+      leading: widget.offset == null
+          ? new IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(parenContext);
                 // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SliverTestPager()));
               },
-            ):null,
-          );
+            )
+          : null,
+    );
   }
 
   //选中
 
-  List<String> pagers = ['assets/imagers/banner1.png','assets/imagers/banner2.png'];
-  Map<String,String> menus = {
-    '本真护肤':'assets/imagers/natural_skin_care.png',
-    '中医理疗':'assets/imagers/physical_therapy.png',
-    '减肥塑形':'assets/imagers/to_lose_weight.png',
+  List<String> pagers = [
+    'assets/imagers/banner1.png',
+    'assets/imagers/banner2.png'
+  ];
+  Map<String, String> menus = {
+    '本真护肤': 'assets/imagers/natural_skin_care.png',
+    '中医理疗': 'assets/imagers/physical_therapy.png',
+    '减肥塑形': 'assets/imagers/to_lose_weight.png',
     '女性私密': 'assets/imagers/female_intimate.png',
-    '内衣专场':'assets/imagers/specia_underwaier.png',
-    '中医药物':'assets/imagers/drug.png',
-    '健康食品':'assets/imagers/foot.png',
-    '两性健康':'assets/imagers/sexual_health.png',};
+    '内衣专场': 'assets/imagers/specia_underwaier.png',
+    '中医药物': 'assets/imagers/drug.png',
+    '健康食品': 'assets/imagers/foot.png',
+    '两性健康': 'assets/imagers/sexual_health.png',
+  };
 
   Widget _getMenu(BuildContext context, int index) {
-     List<String> keys= menus.keys.toList();
-     List<String> imgs = menus.values.toList();
-    return  Container(
-        height: 64,
-        color: Colors.white,
-        child: GestureDetector(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                imgs[index],
+    List<String> keys = menus.keys.toList();
+    List<String> imgs = menus.values.toList();
+    return Container(
+      height: 64,
+      color: Colors.white,
+      child: GestureDetector(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(
+              imgs[index],
+            ),
+            Center(
+              child: Text(
+                keys[index],
+                style: TextStyle(color: Color(0xff333333), fontSize: 12),
               ),
-              Center(
-                child: Text(
-                  keys[index],
-                  style: TextStyle(color: Color(0xff333333), fontSize: 12),
-                ),
-              )
-            ],
-          ),
-          onTap: () {
+            )
+          ],
+        ),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return IncomeBaoLi();
+          }));
 //            Fluttertoast.showToast(
 //                msg: "This is Center Short Toast $index",
 //                backgroundColor: Color(0xff000000),
@@ -287,8 +326,9 @@ class _SliverTestPageState extends State<HomePage> {
 //                gravity: ToastGravity.CENTER,
 //                timeInSecForIos: 1,
 //                textColor: Color(0xffffffff));
-          },
-        ),);
+        },
+      ),
+    );
   }
 
   Widget infItem(BuildContext context, int index) {
@@ -303,9 +343,17 @@ class _SliverTestPageState extends State<HomePage> {
               color: Color(0xffffffff),
             ),
           ),
-          Image.asset(
-            "assets/imagers/home_pager_bg.png",
-            height: 114,
+          GestureDetector(
+              onTap: () {
+                Navigator.push((parenContext),
+                    MaterialPageRoute(builder: (contet) {
+                      return TimeLimitActivity();
+                    }));
+              },
+              child:  Image.asset(
+                "assets/imagers/home_pager_bg.png",
+                height: 114,
+              ),
           ),
           Container(
             padding: EdgeInsets.fromLTRB(9, 0, 9, 10),
@@ -322,6 +370,7 @@ class _SliverTestPageState extends State<HomePage> {
                   new Align(
                     child: Row(
                       children: <Widget>[
+
                         Image.asset(
                           "assets/imagers/notify.png",
                           height: 18,
@@ -405,17 +454,20 @@ class _SliverTestPageState extends State<HomePage> {
     );
   }
 }
+
 class IntSize {
   const IntSize(this.width, this.height);
 
   final int width;
   final int height;
 }
+
 List<IntSize> _createSizes(int count) {
   Random rnd = new Random();
   return new List.generate(count,
-          (i) => new IntSize((rnd.nextInt(500) + 200), rnd.nextInt(800) + 200));
+      (i) => new IntSize((rnd.nextInt(500) + 200), rnd.nextInt(800) + 200));
 }
+
 class _Tile extends StatelessWidget {
   const _Tile(this.index, this.size);
 

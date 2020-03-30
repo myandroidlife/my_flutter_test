@@ -35,8 +35,15 @@ dependencies:
   qr_flutter: ^3.1.0
   barcode_scan: ^1.0.0
   cached_network_image: ^2.0.0
-  camera: ^0.5.7+2
-
+  pull_to_refresh: ^1.5.8
+ # camera: ^0.5.7+2
+  fluwx: ^1.2.1+1
+  flutter_picker: ^1.1.3
+  camera:
+    path: C:\Users\Administrator\Desktop\carmera
+  gzx_dropdown_menu :
+    git:
+      url: https://github.com/GanZhiXiong/gzx_dropdown_menu.git
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -133,6 +140,7 @@ flutter:
     - assets/imagers/ali.png
     - assets/imagers/pay_add.png
     - assets/imagers/remove.png
+    - assets/imagers/limit_bg.png
   # assets-generator-end
 
   # An image asset can refer to one or more resolution-specific "variants", see

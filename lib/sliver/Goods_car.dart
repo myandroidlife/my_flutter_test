@@ -47,6 +47,7 @@ class GoodsCarStat extends State<GoodsCar> {
   }
 
   _emptyWight() {
+
     return SliverList(
         delegate: SliverChildListDelegate([
       Column(
